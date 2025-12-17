@@ -157,17 +157,3 @@ Suggested use:
 This repository is designed for **quick reference and comparison**.
 
 ---
-
-## Guiding Idea
-
-“I want to quickly see how the same small app is structured in different stacks.”
-
-That is the only goal.
-
----
-
-## Reuse
-
-To regenerate this project later, you can ask:
-
-Generate the standardized reference ZIP.
