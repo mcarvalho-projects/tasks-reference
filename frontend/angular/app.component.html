@@ -1,0 +1,24 @@
+<!-- Why this file exists:
+     - Minimal Angular template shape -->
+
+<div style="padding: 16px; font-family: sans-serif;">
+  <h2>Tasks</h2>
+
+  <input [(ngModel)]="titleInput" placeholder="Task title" />
+  <button (click)="addTask()" [disabled]="!titleInput.trim()">Add</button>
+
+  <div *ngIf="toast" style="margin-top: 8px;">
+    Saved!
+  </div>
+
+  <ul>
+    <li *ngFor="let t of tasks">
+      <label style="cursor: pointer;">
+        <input type="checkbox" [checked]="t.done" (change)="toggleDone(t.id)" />
+        <span style="margin-left: 8px;" [style.textDecoration]="t.done ? 'line-through' : 'none'">
+          {{ t.title }}
+        </span>
+      </label>
+    </li>
+  </ul>
+</div>
