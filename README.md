@@ -1,50 +1,55 @@
-# Tasks – Standardized Reference Project
+# Tasks – Multi‑Language Boilerplate Reference
 
-This repository is a minimal reference project, not a real application.
+This repository is a **simple boilerplate reference**, not a real application.
 
-Its purpose is to help you quickly recall structure, file layout, and basic syntax
-for a very small “Tasks” application across multiple backend frameworks
-and two frontends.
+It shows **the same tiny “Tasks” project** implemented in **multiple programming languages and frameworks**, so you can quickly understand:
 
-If you want something you can scan in 20–60 seconds per language to remember:
-- what files exist
-- what goes in each file
-- how things are wired together
+- how each stack is structured
+- which files exist
+- what responsibility each file has
 
-this repository is intended for that use.
+This is meant for **orientation and comparison**, not for production use.
 
 ---
 
-## What This Is and What It Is Not
+## What This Repository Is
 
-### This is
-- A boilerplate-first reference
-- A structure map for common stacks
-- A way to compare the same application shape across languages
-- A minimal, ORM-first example that runs but stays simple
+This project is a **side‑by‑side reference**.
 
-### This is not
-- A production-ready application
-- A best-practices guide
-- A complete tutorial
-- An example of ideal architecture
+Every backend implements the **same small API** using a different language or framework.
+The goal is to help you answer questions like:
 
-Correctness is secondary to clarity.
+- “How does this look in Spring vs .NET?”
+- “Where does the controller live in NestJS?”
+- “What is the minimal ORM setup in Flask or FastAPI?”
+
+You should be able to skim any folder in **under one minute**.
 
 ---
 
-## Concept Shown
+## What This Repository Is Not
 
-A very small Tasks API with the same shape everywhere.
+- Not a production-ready application
+- Not a best-practices guide
+- Not a tutorial
+- Not a complete example
 
-### API (same for all backends)
+Details are intentionally simplified.
+
+---
+
+## Shared Concept (Same Everywhere)
+
+### API
+
+All backends expose the same endpoints:
 
 GET    /health  
 GET    /tasks  
 POST   /tasks  
 PATCH  /tasks/{id}/done  
 
-### Data model
+### Data Model
 
 Task  
 - id  
@@ -53,9 +58,9 @@ Task
 
 ### Messaging
 
-When a task is created, a message is published to the RabbitMQ queue `task.created`.
-
-A consumer prints:
+When a task is created:
+- a message is published to RabbitMQ queue `task.created`
+- a consumer prints:
 
 NOTIFICATION: Task created
 
@@ -63,6 +68,7 @@ NOTIFICATION: Task created
 
 ## Repository Structure
 
+```
 tasks-cheat-reference/
 ├── backend/
 │   ├── csharp-minimal/
@@ -77,40 +83,51 @@ tasks-cheat-reference/
 │   └── angular/
 └── rabbitmq/
     └── README.txt
+```
 
 ---
 
 ## Backends
 
-Each backend folder contains:
+Each backend folder represents **one language / framework**.
 
-README.txt        explains setup and what the backend demonstrates  
-api/              HTTP API, ORM usage, and RabbitMQ producer  
-consumer/         RabbitMQ consumer that prints a notification  
+Each contains:
 
-Backend rules:
-- ORM-first
-- SQLite or H2
-- Tables auto-created from models
-- Minimal logic
-- No migrations
-- No raw SQL unless unavoidable
-- Same endpoint behavior everywhere
+- README.txt  
+  Explains setup and what that backend demonstrates
+
+- api/  
+  Minimal HTTP API, ORM setup, and RabbitMQ producer
+
+- consumer/  
+  Minimal RabbitMQ consumer that prints a notification
+
+All backends:
+- use an ORM
+- auto-create tables from models
+- keep logic intentionally small
+- expose the same API shape
 
 ---
 
 ## Frontends
 
-React:
-- One file: App.jsx
-- State, form, list rendering, toggle done, simple toast
-- Uses http://localhost:5101
+Two minimal frontends are included to show how the API is consumed.
 
-Angular:
+### React (Vite)
+- Single file: App.jsx
+- Uses fetch
+- Shows state, form, list, toggle done, and a simple toast
+
+### Angular
 - app.component.ts
 - app.component.html
-- ngModel, *ngFor, click handlers, toggle done, simple toast
-- Uses http://localhost:5101
+- Uses HttpClient
+- Shows ngModel, *ngFor, toggle done, and a simple toast
+
+Both call the backend at:
+
+http://localhost:5101
 
 Each frontend folder includes setup instructions.
 
@@ -118,44 +135,39 @@ Each frontend folder includes setup instructions.
 
 ## RabbitMQ
 
-RabbitMQ is included only to show structure.
+RabbitMQ usage is intentionally minimal.
 
 Each backend includes:
-- a producer that publishes to task.created
-- a consumer that prints a single line
+- one producer that publishes to `task.created`
+- one consumer that prints a single line
 
-No retries.  
-No exchanges.  
-No durability tuning.
+No retries, no advanced configuration.
 
 ---
 
 ## How to Use This Repository
 
-1. Choose one backend
-2. Read its README.txt
-3. Scan files in this order:
-   - entry point
-   - database and model
-   - controller or routes
-   - RabbitMQ producer
-   - RabbitMQ consumer
-4. Compare with another backend
+Suggested use:
 
-This repository is designed for reading and orientation, not extension.
+1. Pick a backend you know
+2. Pick one you want to learn
+3. Compare file-by-file
+4. Focus on structure, not details
+
+This repository is designed for **quick reference and comparison**.
 
 ---
 
-## Guiding Principle
+## Guiding Idea
 
-I want to remember how this is structured in 20 seconds.
+“I want to quickly see how the same small app is structured in different stacks.”
 
-That is the only success metric.
+That is the only goal.
 
 ---
 
 ## Reuse
 
-To regenerate this project later, you can simply ask:
+To regenerate this project later, you can ask:
 
 Generate the standardized reference ZIP.
